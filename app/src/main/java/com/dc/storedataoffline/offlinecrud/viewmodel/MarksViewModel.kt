@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.AsyncTask
 import androidx.annotation.NonNull
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dc.storedataoffline.offlinecrud.database.AppDAO
 import com.dc.storedataoffline.offlinecrud.database.AppDatabase
@@ -35,6 +36,10 @@ class MarksViewModel(@NonNull application: Application) : AndroidViewModel(appli
             "deleteTable"
         ).execute(null)
         return callBacks
+    }
+
+    fun getMarksListById(studentId : String) : LiveData<List<MarksModel>>{
+        return appDAO.getMarksListById(studentId)
     }
 
 

@@ -1,5 +1,6 @@
 package com.dc.storedataoffline.offlinecrud
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -8,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dc.storedataoffline.ItemClickListener
 import com.dc.storedataoffline.offlinecrud.adapter.StudentListAdapter
 import com.dc.storedataoffline.offlinecrud.model.ClassModel
 import com.dc.storedataoffline.offlinecrud.model.StudentModel
@@ -44,7 +46,9 @@ class OfflineCrudActivity : AppCompatActivity() {
         fetchStudentList()
 
         deleteAllTables().observe(this, Observer { del ->
+            Log.d("debayan","cla")
             if (del[0] && del[1] && del[2]) {
+
                 getClassList()
             }
         })
@@ -169,13 +173,12 @@ class OfflineCrudActivity : AppCompatActivity() {
         if (::studentViewModel.isInitialized) {
             if (studentList.isNotEmpty()) {
                 for (studentModel in studentList) {
-                    studentViewModel.insertStudent(studentModel).observe(this, Observer {
-                        if (studentModel.marksList.isNotEmpty()) {
-                            for (markModel in studentModel.marksList) {
-                                marksViewModel.insertMarks(markModel)
-                            }
+                    studentViewModel.insertStudent(studentModel)
+                    if (studentModel.marksList.isNotEmpty()) {
+                        for (markModel in studentModel.marksList) {
+                            marksViewModel.insertMarks(markModel)
                         }
-                    })
+                    }
                 }
             }
         }
@@ -193,7 +196,12 @@ class OfflineCrudActivity : AppCompatActivity() {
 
     private fun setRecyclerView(studentList: List<StudentModel>) {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val studentListAdapter = StudentListAdapter(studentList)
+        val studentListAdapter = StudentListAdapter(studentList,object : ItemClickListener{
+            override fun onItemClick(position: Int, operation: String) {
+                val studentModel = studentList[position]
+                goToNextActivity(studentModel)
+            }
+        })
         recyclerView.adapter = studentListAdapter
 
         if ( studentList.isNotEmpty()) {
@@ -212,6 +220,20 @@ class OfflineCrudActivity : AppCompatActivity() {
                 }
             }
         }
+
+    }
+
+    private fun goToNextActivity(studentModel: StudentModel) {
+        val bundle = Bundle()
+        bundle.putString("studentsId",studentModel.studentsId)
+        bundle.putString("studentsName",studentModel.studentsName)
+        bundle.putString("studentsRoll",studentModel.studentsRoll)
+        bundle.putString("classId",studentModel.classId)
+        bundle.putString("className",studentModel.className)
+
+        val intent = Intent(this, StudentDetailsActivity::class.java)
+        intent.putExtra("bundle",bundle)
+        startActivity(intent)
 
     }
 }

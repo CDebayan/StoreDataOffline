@@ -34,4 +34,7 @@ interface AppDAO {
 
     @Query("DELETE FROM ClassModel")
     fun deleteClassTable()
+
+    @Query("SELECT * FROM MarksModel where studentId=:studentId")
+    fun getMarksListById(studentId: String) : LiveData<List<MarksModel>>
 }
