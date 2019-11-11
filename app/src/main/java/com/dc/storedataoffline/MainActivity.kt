@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.dc.storedataoffline.offlinecrud.OfflineCrudActivity
+import com.dc.storedataoffline.offlineimage.ImageListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +15,10 @@ class MainActivity : AppCompatActivity() {
 
         crudButton.setOnClickListener {
             startActivity(Intent(this, OfflineCrudActivity::class.java))
+        }
+
+        button.setOnClickListener {
+            startActivity(Intent(this, ImageListActivity::class.java))
         }
     }
 }

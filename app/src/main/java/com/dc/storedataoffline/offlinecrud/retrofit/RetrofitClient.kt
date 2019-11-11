@@ -12,7 +12,8 @@ import java.io.IOException
 
 object RetrofitClient {
 
-    private const val BASE_URL = "http://192.168.0.6/myschool/scripts/"
+    //private const val BASE_URL = "http://192.168.0.6/myschool/scripts/"
+    private const val BASE_URL = "https://api.myjson.com/bins/"
     private val okHttpClientBuilder = OkHttpClient.Builder()
         private val logInterceptor = HttpLoggingInterceptor()
 
