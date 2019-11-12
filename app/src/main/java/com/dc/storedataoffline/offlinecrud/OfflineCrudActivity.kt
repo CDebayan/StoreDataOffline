@@ -18,6 +18,7 @@ import com.dc.storedataoffline.offlinecrud.response.StudentListResponse
 import com.dc.storedataoffline.offlinecrud.retrofit.RetrofitClient
 import com.dc.storedataoffline.offlinecrud.viewmodel.ClassViewModel
 import com.dc.storedataoffline.offlinecrud.viewmodel.MarksViewModel
+import com.dc.storedataoffline.offlinecrud.viewmodel.NewStudentViewModel
 import com.dc.storedataoffline.offlinecrud.viewmodel.StudentViewModel
 import kotlinx.android.synthetic.main.activity_offline_crud_activiy.*
 import retrofit2.Call
@@ -31,6 +32,7 @@ class OfflineCrudActivity : AppCompatActivity() {
 
     //private lateinit var studentList: List<StudentModel>
     lateinit var studentViewModel: StudentViewModel
+    lateinit var newStudentViewModel: NewStudentViewModel
     lateinit var marksViewModel: MarksViewModel
     lateinit var classViewModel: ClassViewModel
 
@@ -40,18 +42,26 @@ class OfflineCrudActivity : AppCompatActivity() {
         setContentView(com.dc.storedataoffline.R.layout.activity_offline_crud_activiy)
 
         studentViewModel = ViewModelProviders.of(this).get(StudentViewModel::class.java)
+        newStudentViewModel = ViewModelProviders.of(this).get(NewStudentViewModel::class.java)
         marksViewModel = ViewModelProviders.of(this).get(MarksViewModel::class.java)
         classViewModel = ViewModelProviders.of(this).get(ClassViewModel::class.java)
 
-        fetchStudentList()
-
-        deleteAllTables().observe(this, Observer { del ->
-            Log.d("debayan","cla")
-            if (del[0] && del[1] && del[2]) {
-
-                getClassList()
-            }
+        newStudentViewModel.deleteStudentTable().observe(this, Observer {
+            showToast("")
+            getClassList()
+            fetchStudentList()
         })
+
+       // getClassList()
+        //fetchStudentList()
+
+//        deleteAllTables().observe(this, Observer { del ->
+//            Log.d("debayan","cla")
+//            if (del[0] && del[1] && del[2]) {
+//
+//                getClassList()
+//            }
+//        })
 
         onClickListener()
     }
