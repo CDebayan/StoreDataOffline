@@ -5,9 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.dc.storedataoffline.offlinecrud.model.ClassModel
-import com.dc.storedataoffline.offlinecrud.model.MarksModel
-import com.dc.storedataoffline.offlinecrud.model.StudentModel
+import com.dc.storedataoffline.offlinecrud.model.*
 
 @Dao
 interface AppDAO {
@@ -24,7 +22,7 @@ interface AppDAO {
     fun deleteMarksTable()
 
     @Query("SELECT * FROM StudentModel")
-    fun getStudentList() : LiveData<List<StudentModel>>
+    fun getStudentList() : LiveData<List<MyClass>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertClass(classModel: ClassModel)

@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dc.storedataoffline.ItemClickListener
 import com.dc.storedataoffline.offlinecrud.adapter.StudentListAdapter
 import com.dc.storedataoffline.offlinecrud.model.ClassModel
+import com.dc.storedataoffline.offlinecrud.model.MyClass
 import com.dc.storedataoffline.offlinecrud.model.StudentModel
+import com.dc.storedataoffline.offlinecrud.model.StudentModelNew
 import com.dc.storedataoffline.offlinecrud.response.ClassListResponse
 import com.dc.storedataoffline.offlinecrud.response.StudentListResponse
 import com.dc.storedataoffline.offlinecrud.retrofit.RetrofitClient
@@ -198,9 +200,13 @@ class OfflineCrudActivity : AppCompatActivity() {
     private fun fetchStudentList() {
         if (::studentViewModel.isInitialized) {
             studentViewModel.getStudentList()
-                .observe(this, Observer<List<StudentModel>> { studentList ->
-                    setRecyclerView(studentList)
+                .observe(this, Observer<List<MyClass>> { studentList ->
+                    val a = studentList
+                    Log.d("fff","a")
                 })
+
+
+
         }
     }
 

@@ -1,20 +1,14 @@
 package com.dc.storedataoffline.offlinecrud.viewmodel
 
 import android.app.Application
-import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.os.AsyncTask
 import androidx.annotation.NonNull
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dc.storedataoffline.offlinecrud.database.AppDAO
 import com.dc.storedataoffline.offlinecrud.database.AppDatabase
 import com.dc.storedataoffline.offlinecrud.model.StudentModel
-import androidx.sqlite.db.SupportSQLiteOpenHelper
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import com.dc.storedataoffline.offlinecrud.model.ClassModel
-import com.dc.storedataoffline.offlinecrud.model.MarksModel
 
 
 class NewStudentViewModel(@NonNull application: Application) : AndroidViewModel(application) {

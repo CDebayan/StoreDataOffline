@@ -8,7 +8,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dc.storedataoffline.offlinecrud.database.AppDAO
 import com.dc.storedataoffline.offlinecrud.database.AppDatabase
+import com.dc.storedataoffline.offlinecrud.model.MyClass
 import com.dc.storedataoffline.offlinecrud.model.StudentModel
+import com.dc.storedataoffline.offlinecrud.model.StudentModelNew
 
 class StudentViewModel(@NonNull application: Application) : AndroidViewModel(application) {
     private val appDAO: AppDAO
@@ -37,7 +39,8 @@ class StudentViewModel(@NonNull application: Application) : AndroidViewModel(app
         return callBacks
     }
 
-    fun getStudentList() : LiveData<List<StudentModel>>{
+    fun getStudentList() : LiveData<List<MyClass>>{
+
         return appDAO.getStudentList()
     }
 
